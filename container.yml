@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mysqlsrv:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "123"
+      MYSQL_DATABASE: "monitora-sc"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    networks:
+      - compose-network
+  mongodb:
+    image: mongo
+    networks:
+      - compose-network
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./volumes/mongo:/data/db
+
+networks:
+  compose-network:
+    driver: bridge
