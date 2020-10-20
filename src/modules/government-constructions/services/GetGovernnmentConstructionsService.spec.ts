@@ -1,19 +1,18 @@
-import AppError from '@shared/errors/AppError';
 import FakeGovarnamentConstructionsLocalization from '../providers/fakes/FakeGovarnamentConstructionsLocalization';
 import FakeConstructionsLocalizationRepository from '../repositories/fakes/FakeConstructionsLocalizationRepository';
-import GetGovernanmentConstructionsService from './GetGovernanmentConstructionsService';
+import GetGovernnmentConstructionsService from './GetGovernnmentConstructionsService';
 
-describe('GetGovarnamentConstructionsLocalization', () => {
+describe('GetGovernnmentConstructionsService', () => {
   it('should be able to create a new construction localization', async () => {
     const fakeConstructionsLocalizationRepository = new FakeConstructionsLocalizationRepository();
     const fakeGovarnamentConstructionsLocalization = new FakeGovarnamentConstructionsLocalization();
 
-    const getGovarnamentConstructionsLocalization = new GetGovernanmentConstructionsService(
+    const getGovernmentConstructionsLocalization = new GetGovernnmentConstructionsService(
       fakeConstructionsLocalizationRepository,
       fakeGovarnamentConstructionsLocalization,
     );
 
-    const user = await getGovarnamentConstructionsLocalization.execute();
+    const user = await getGovernmentConstructionsLocalization.execute();
 
     expect(user).toHaveProperty('id');
   });

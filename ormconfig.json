@@ -17,11 +17,13 @@
     }
   },
   {
-    "type": "mongo",
+    "name": "mongo",
+    "type": "mongodb",
     "host": "localhost",
     "port": "27017",
     "database": "monitora-sc",
     "useUnifiedTopology": true,
+    "synchronize": true,
     "entities": [
       "./src/modules/**/infra/typeorm/schemas/*.ts"
     ]

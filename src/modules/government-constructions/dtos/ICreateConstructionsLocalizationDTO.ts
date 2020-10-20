@@ -1,5 +1,5 @@
 export default interface ICreateConstructionsLocalizationDTO {
-  id: string;
+  construction_id: string;
   description: string;
   nuLatitude: number;
   nuLongitude: number;

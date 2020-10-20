@@ -1,4 +1,4 @@
-import GetGovernanmentConstructionsService from '@modules/constructions/services/GetGovernanmentConstructionsService';
+import GetGovernanmentConstructionsService from '@modules/government-constructions/services/GetGovernnmentConstructionsService';
 import CreateUserService from '@modules/users/services/CreateUserService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';

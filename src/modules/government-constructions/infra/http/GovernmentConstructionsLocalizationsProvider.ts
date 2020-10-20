@@ -1,12 +1,15 @@
-import IGovarnamentConstructionLocalizationProvider from '@modules/constructions/providers/IGovarnamentConstructionLocalizationProvider';
+import IGovernmentConstructionLocalizationProvider from '@modules/government-constructions/providers/IGovernmentConstructionLocalizationProvider';
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
+import GovernmentConstructionsLocalizations from '../typeorm/schemas/GovernmentConstructionsLocalizations';
 
-class GovarnamentConstructionsLocalization
-  implements IGovarnamentConstructionLocalizationProvider {
-  public async getAll(): Promise<string | undefined> {
+class GovernmentConstructionsLocalizationsProvider
+  implements IGovernmentConstructionLocalizationProvider {
+  public async getAll(): Promise<
+    GovernmentConstructionsLocalizations[] | undefined
+  > {
     try {
-      return await axios.post(
+      const result = await axios.post(
         'http://www.sicop.sc.gov.br/sef-map-backend/source/map/publicassets/list',
         {
           period: { dtInicial: null, dtFinal: null },
@@ -76,10 +79,31 @@ class GovarnamentConstructionsLocalization
           ],
         },
       );
+
+      const governamentConstructionsLocalizationsList: GovernmentConstructionsLocalizations[] = [];
+
+      // eslint-disable-next-line array-callback-return
+      result.data.map((construction: { id: string }) => {
+        const governamentConstructionsLocalizations = new GovernmentConstructionsLocalizations();
+
+        Object.assign(
+          governamentConstructionsLocalizations,
+          { construction_id: construction.id },
+          construction,
+        );
+
+        delete governamentConstructionsLocalizations.id;
+
+        governamentConstructionsLocalizationsList.push(
+          governamentConstructionsLocalizations,
+        );
+      });
+
+      return governamentConstructionsLocalizationsList;
     } catch (error) {
       throw new AppError(error);
     }
   }
 }
 
-export default GovarnamentConstructionsLocalization;
+export default GovernmentConstructionsLocalizationsProvider;
