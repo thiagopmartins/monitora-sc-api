@@ -1,12 +1,16 @@
-import IConstructionsLocalization from '@modules/constructions/infra/mongoose/entities/IConstructionsLocalization';
-import IGovarnamentConstructionLocalizationProvider from '@modules/constructions/providers/IGovarnamentConstructionLocalizationProvider';
+import GovernmentConstructionsLocalizations from '@modules/government-constructions/infra/typeorm/schemas/GovernmentConstructionsLocalizations';
 import AppError from '@shared/errors/AppError';
+import IGovernmentConstructionLocalizationProvider from '../IGovernmentConstructionLocalizationProvider';
 
 class FakeGovarnamentConstructionsLocalization
-  implements IGovarnamentConstructionLocalizationProvider {
-  public async getAll(): Promise<string | undefined> {
+  implements IGovernmentConstructionLocalizationProvider {
+  private constructions: GovernmentConstructionsLocalizations[] = [];
+
+  public async getAll(): Promise<
+    GovernmentConstructionsLocalizations[] | undefined
+  > {
     try {
-      const result: IConstructionsLocalization = {
+      const construction = {
         id: 'SC110 _24',
         description:
           'PETROLÂNDIA (ENTR. SC-284) - ENTR. BR-282 (P/ BOCAINA DO SUL)',
@@ -34,7 +38,19 @@ class FakeGovarnamentConstructionsLocalization
         heatMapQuantity: 2.12,
       };
 
-      return JSON.stringify(result);
+      const governamentConstructionsLocalizations = new GovernmentConstructionsLocalizations();
+
+      Object.assign(
+        governamentConstructionsLocalizations,
+        { construction_id: construction.id },
+        construction,
+      );
+
+      delete governamentConstructionsLocalizations.id;
+
+      this.constructions.push(governamentConstructionsLocalizations);
+
+      return this.constructions;
     } catch (error) {
       throw new AppError(error);
     }

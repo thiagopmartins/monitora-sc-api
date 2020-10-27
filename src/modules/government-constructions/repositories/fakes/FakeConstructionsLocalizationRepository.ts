@@ -1,28 +1,46 @@
-import ICreateConstructionsLocalizationDTO from '@modules/constructions/dtos/ICreateConstructionsLocalizationDTO';
-import IConstructionsLocalization from '@modules/constructions/infra/mongoose/entities/IConstructionsLocalization';
-import { ConstructionLocalizationType } from '@modules/constructions/infra/mongoose/schemas/ConstructionLocalizationSchema';
+import ICreateConstructionsLocalizationDTO from '@modules/government-constructions/dtos/ICreateConstructionsLocalizationDTO';
+import GovernmentConstructionsLocalizations from '@modules/government-constructions/infra/typeorm/schemas/GovernmentConstructionsLocalizations';
 import { uuid } from 'uuidv4';
-import IConstructionsLocalizationRepository from '../IConstructionsLocalizationRepository';
+import IGovernmentConstructionsLocalizationsRepository from '../IGovernmentConstructionsLocalizationsRepository';
 
 class FakeConstructionsLocalizationRepository
-  implements IConstructionsLocalizationRepository {
-  private constructions: IConstructionsLocalization[] = [];
+  implements IGovernmentConstructionsLocalizationsRepository {
+  public constructions: GovernmentConstructionsLocalizations[] = [];
+
+  public async update(
+    construction: GovernmentConstructionsLocalizations,
+  ): Promise<GovernmentConstructionsLocalizations> {
+    const findIndex = this.constructions.findIndex(
+      findConstruction => findConstruction.id === construction.id,
+    );
+
+    this.constructions[findIndex] = construction;
+
+    return construction;
+  }
 
   public async create(
-    construction: ICreateConstructionsLocalizationDTO,
-  ): Promise<ConstructionLocalizationType> {
-    const teste: ConstructionLocalizationType = {};
-    Object.assign(teste, { id: uuid() }, construction);
+    constructionDTO: ICreateConstructionsLocalizationDTO,
+  ): Promise<GovernmentConstructionsLocalizations> {
+    const construction = new GovernmentConstructionsLocalizations();
+
+    const date = new Date();
+
+    Object.assign(
+      construction,
+      { id: uuid(), created_at: date, updated_at: date },
+      constructionDTO,
+    );
     this.constructions.push(construction);
 
-    return teste;
+    return construction;
   }
 
   public async findByConstructionLocalizarionId(
     id: string,
-  ): Promise<IConstructionsLocalization | undefined> {
+  ): Promise<GovernmentConstructionsLocalizations | undefined> {
     const findConstruction = this.constructions.find(
-      construction => construction.id === id,
+      construction => construction.construction_id === id,
     );
     return findConstruction;
   }

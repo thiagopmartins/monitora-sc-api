@@ -10,18 +10,28 @@ class GetGovernnmentConstructionsService {
     private governmentConstructionsLocalizationsRepository: IGovernmentConstructionsLocalizationsRepository,
 
     @inject('GovernmentConstructionsLocalizationsProvider')
-    private governmentConstructionsLocalizationProvicer: IGovernmentConstructionLocalizationProvider,
+    private governmentConstructionsLocalizationProvider: IGovernmentConstructionLocalizationProvider,
   ) {}
 
   public async execute(): Promise<void> {
-    const result = await this.governmentConstructionsLocalizationProvicer.getAll();
-
+    const result = await this.governmentConstructionsLocalizationProvider.getAll();
+    console.log(result);
     if (result !== undefined) {
-      result.map((construction: ICreateConstructionsLocalizationDTO) =>
-        this.governmentConstructionsLocalizationsRepository.create(
-          construction,
-        ),
-      );
+      result.map(async construction => {
+        const constructionAlreadyExists = await this.governmentConstructionsLocalizationsRepository.findByConstructionLocalizarionId(
+          construction.construction_id,
+        );
+
+        if (!constructionAlreadyExists) {
+          await this.governmentConstructionsLocalizationsRepository.create(
+            construction as ICreateConstructionsLocalizationDTO,
+          );
+        } else {
+          await this.governmentConstructionsLocalizationsRepository.update(
+            constructionAlreadyExists,
+          );
+        }
+      });
     }
   }
 }

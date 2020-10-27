@@ -14,6 +14,12 @@ class GovernmentConstructionsLocalizationsRepository
     );
   }
 
+  public async update(
+    data: GovernmentConstructionsLocalizations,
+  ): Promise<GovernmentConstructionsLocalizations> {
+    return this.ormRepository.save(data);
+  }
+
   public async create(
     _data: ICreateConstructionsLocalizationDTO,
   ): Promise<GovernmentConstructionsLocalizations> {
@@ -26,10 +32,13 @@ class GovernmentConstructionsLocalizationsRepository
     return governmentConstructionsLocalization;
   }
 
-  findByConstructionLocalizarionId(
+  public async findByConstructionLocalizarionId(
     construction_id: string,
   ): Promise<GovernmentConstructionsLocalizations | undefined> {
-    throw new Error('Method not implemented.');
+    const construction = await this.ormRepository.findOne({
+      where: { construction_id },
+    });
+    return construction;
   }
 }
 

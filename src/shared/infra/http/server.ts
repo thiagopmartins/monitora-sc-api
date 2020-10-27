@@ -9,6 +9,7 @@ import routes from './routes';
 
 import '@shared/infra/typeorm';
 import '@shared/container';
+import '@shared/schedules';
 
 const app = express();
 

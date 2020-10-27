@@ -5,7 +5,12 @@ export default interface IGovernmentConstructionsLocalizationsRepository {
   create(
     data: ICreateConstructionsLocalizationDTO,
   ): Promise<GovernmentConstructionsLocalizations>;
+
   findByConstructionLocalizarionId(
     construction_id: string,
   ): Promise<GovernmentConstructionsLocalizations | undefined>;
+
+  update(
+    data: GovernmentConstructionsLocalizations,
+  ): Promise<GovernmentConstructionsLocalizations>;
 }

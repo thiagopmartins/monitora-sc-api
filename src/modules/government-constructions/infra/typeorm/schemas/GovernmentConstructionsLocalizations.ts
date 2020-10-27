@@ -11,7 +11,7 @@ import {
 @Entity('government-constructions-localizations')
 class GovernmentConstructionsLocalizations {
   @ObjectIdColumn()
-  id: ObjectID;
+  id?: ObjectID;
 
   @Column()
   @Index({ unique: true })
