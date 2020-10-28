@@ -1,4 +1,5 @@
 import IGovernmentConstructionLocalizationProvider from '@modules/government-constructions/providers/IGovernmentConstructionLocalizationProvider';
+import logger from '@shared/container/providers/Logs';
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
 import GovernmentConstructionsLocalizations from '../typeorm/schemas/GovernmentConstructionsLocalizations';
@@ -98,6 +99,10 @@ class GovernmentConstructionsLocalizationsProvider
           governamentConstructionsLocalizations,
         );
       });
+
+      logger.info(
+        `Foram encontradas ${governamentConstructionsLocalizationsList.length} localizações de obras na api do governo.`,
+      );
 
       return governamentConstructionsLocalizationsList;
     } catch (error) {

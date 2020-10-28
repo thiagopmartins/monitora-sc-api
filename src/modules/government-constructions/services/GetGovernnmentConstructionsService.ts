@@ -15,7 +15,6 @@ class GetGovernnmentConstructionsService {
 
   public async execute(): Promise<void> {
     const result = await this.governmentConstructionsLocalizationProvider.getAll();
-    console.log(result);
     if (result !== undefined) {
       result.map(async construction => {
         const constructionAlreadyExists = await this.governmentConstructionsLocalizationsRepository.findByConstructionLocalizarionId(
