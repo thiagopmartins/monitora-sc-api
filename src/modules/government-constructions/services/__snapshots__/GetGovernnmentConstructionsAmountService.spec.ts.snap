@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GetGovernnmentConstructionsAmountService should be able to create a new construction amount 1`] = `
+Array [
+  Object {
+    "amount": 469780.47,
+    "area": "Justiça e Cidadania",
+    "cities": Array [],
+    "cityDescription": "Concórdia",
+    "cityId": 8083,
+    "constructionSites": Array [],
+    "construction_amount_id": Any<Number>,
+    "contracts": Array [
+      Object {
+        "description": null,
+        "id": 1031437,
+        "number": null,
+      },
+    ],
+    "created_at": Any<Date>,
+    "description": "CONSTRUÇÃO DA MURALHA - CASEP CONCÓRDIA ",
+    "id": Any<String>,
+    "number": "624",
+    "peExecuted": 0,
+    "projectLink": null,
+    "status": "A iniciar",
+    "updated_at": Any<Date>,
+    "year": 2020,
+  },
+]
+`;
