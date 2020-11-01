@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GetGovernmentConstructionsExpenditure should be able to create a new construction expenditure 1`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 46,
+  "projectsValue": 62870681.61,
+  "statusDesc": "a iniciar",
+  "statusId": 3,
+  "updated_at": Any<Date>,
+}
+`;
+
+exports[`GetGovernmentConstructionsExpenditure should be able to create a new construction expenditure 2`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 185,
+  "projectsValue": 2562983381.98,
+  "statusDesc": "em andamento",
+  "statusId": 2,
+  "updated_at": Any<Date>,
+}
+`;
+
+exports[`GetGovernmentConstructionsExpenditure should be able to create a new construction expenditure 3`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 2370,
+  "projectsValue": 4303475941.88,
+  "statusDesc": "concluídas",
+  "statusId": 1,
+  "updated_at": Any<Date>,
+}
+`;
+
+exports[`GetGovernmentConstructionsExpenditure should be able to create a new construction expenditure 4`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 62,
+  "projectsValue": 1242808711.89,
+  "statusDesc": "paralisadas",
+  "statusId": 4,
+  "updated_at": Any<Date>,
+}
+`;
+
+exports[`GetGovernmentConstructionsExpenditure should be able to create a new construction expenditure 5`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 35,
+  "projectsValue": 35757031.48,
+  "statusDesc": "rescindidas",
+  "statusId": 5,
+  "updated_at": Any<Date>,
+}
+`;
+
+exports[`GetGovernmentConstructionsExpenditure should be able to update if already exists construcion expenditure 1`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 46,
+  "projectsValue": 62870681.61,
+  "statusDesc": "a iniciar",
+  "statusId": 3,
+  "updated_at": Any<Date>,
+}
+`;
+
+exports[`GetGovernmentConstructionsExpenditure should be able to update if already exists construcion expenditure 2`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 185,
+  "projectsValue": 2562983381.98,
+  "statusDesc": "em andamento",
+  "statusId": 2,
+  "updated_at": Any<Date>,
+}
+`;
+
+exports[`GetGovernmentConstructionsExpenditure should be able to update if already exists construcion expenditure 3`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 2370,
+  "projectsValue": 4303475941.88,
+  "statusDesc": "concluídas",
+  "statusId": 1,
+  "updated_at": Any<Date>,
+}
+`;
+
+exports[`GetGovernmentConstructionsExpenditure should be able to update if already exists construcion expenditure 4`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 62,
+  "projectsValue": 1242808711.89,
+  "statusDesc": "paralisadas",
+  "statusId": 4,
+  "updated_at": Any<Date>,
+}
+`;
+
+exports[`GetGovernmentConstructionsExpenditure should be able to update if already exists construcion expenditure 5`] = `
+Object {
+  "created_at": Any<Date>,
+  "id": Any<String>,
+  "projectsAmount": 35,
+  "projectsValue": 35757031.48,
+  "statusDesc": "rescindidas",
+  "statusId": 5,
+  "updated_at": Any<Date>,
+}
+`;

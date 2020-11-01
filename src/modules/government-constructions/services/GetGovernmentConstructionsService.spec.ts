@@ -1,6 +1,6 @@
 import FakeGovarnamentConstructionsLocalization from '../providers/fakes/FakeGovarnamentConstructionsLocalization';
 import FakeConstructionsLocalizationRepository from '../repositories/fakes/FakeConstructionsLocalizationRepository';
-import GetGovernnmentConstructionsService from './GetGovernnmentConstructionsService';
+import GetGovernnmentConstructionsService from './GetGovernmentConstructionsService';
 
 describe('GetGovernnmentConstructionsService', () => {
   it('should be able to create a new construction localization', async () => {

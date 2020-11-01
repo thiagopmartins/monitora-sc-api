@@ -1,6 +1,6 @@
 import FakeGovarnamentConstructionsAmount from '../providers/fakes/FakeGovarnamentConstructionsAmount';
-import FakeConstructionsAmountRepository from '../repositories/fakes/FakeConstructionsLocalizationRepository copy';
-import GetGovernnmentConstructionsAmountService from './GetGovernnmentConstructionsAmountService';
+import FakeConstructionsAmountRepository from '../repositories/fakes/FakeConstructionsAmountRepository';
+import GetGovernnmentConstructionsAmountService from './GetGovernmentConstructionsAmountService';
 
 describe('GetGovernnmentConstructionsAmountService', () => {
   let fakeConstructionsAmountRepository: FakeConstructionsAmountRepository;

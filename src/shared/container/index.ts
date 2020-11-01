@@ -14,6 +14,10 @@ import IGovernmentConstructionAmountProvider from '@modules/government-construct
 import GovernmentConstructionsAmountsProvider from '@modules/government-constructions/infra/http/GovernmentConstructionsAmountsProvider';
 import IGovernmentConstructionsAmountsRepository from '@modules/government-constructions/repositories/IGovernmentConstructionsAmountsRepository';
 import GovernmentConstructionsAmountsRepository from '@modules/government-constructions/infra/typeorm/repositories/GovernmentConstructionsAmountsRepository';
+import IGovernmentConstructionsExpenditureProvider from '@modules/government-constructions/providers/IGovernmentConstructionsExpenditureProvider';
+import GovernmentConstructionsExpenditureProvider from '@modules/government-constructions/infra/http/GovernmentConstructionsExpenditureProvider';
+import IGovernmentConstructionsExpenditureRepository from '@modules/government-constructions/repositories/IGovernmentConstructionsExpenditureRepository';
+import GovernmentConstructionsExpenditureRepository from '@modules/government-constructions/infra/typeorm/repositories/GovernmentConstructionsExpenditureRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -38,4 +42,14 @@ container.registerSingleton<IGovernmentConstructionAmountProvider>(
 container.registerSingleton<IGovernmentConstructionsAmountsRepository>(
   'GovernmentConstructionsAmountsRepository',
   GovernmentConstructionsAmountsRepository,
+);
+
+container.registerSingleton<IGovernmentConstructionsExpenditureProvider>(
+  'GovernmentConstructionsExpenditureProvider',
+  GovernmentConstructionsExpenditureProvider,
+);
+
+container.registerSingleton<IGovernmentConstructionsExpenditureRepository>(
+  'GovernmentConstructionsExpenditureRepository',
+  GovernmentConstructionsExpenditureRepository,
 );

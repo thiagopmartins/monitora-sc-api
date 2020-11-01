@@ -3,13 +3,14 @@ import { container } from 'tsyringe';
 
 import logger from '@shared/container/providers/Logs';
 
-import GetGovernanmentConstructionsService from '@modules/government-constructions/services/GetGovernnmentConstructionsService';
-import GetGovernnmentConstructionsAmountService from '@modules/government-constructions/services/GetGovernnmentConstructionsAmountService';
+import GetGovernmentConstructionsService from '@modules/government-constructions/services/GetGovernmentConstructionsService';
+import GetGovernmentConstructionsAmountService from '@modules/government-constructions/services/GetGovernmentConstructionsAmountService';
+import GetGovernmentConstructionsExpenditureService from '@modules/government-constructions/services/GetGovernmentConstructionsExpenditureService';
 
 cron.schedule('1 * * * * *', () => {
   logger.info('Iniciando a busca de localização de obras.');
 
-  const construction = container.resolve(GetGovernanmentConstructionsService);
+  const construction = container.resolve(GetGovernmentConstructionsService);
   construction.execute();
 });
 
@@ -17,7 +18,16 @@ cron.schedule('1 * * * * *', () => {
   logger.info('Iniciando a busca de valores de obras.');
 
   const construction = container.resolve(
-    GetGovernnmentConstructionsAmountService,
+    GetGovernmentConstructionsAmountService,
   );
   construction.execute();
+});
+
+cron.schedule('1 * * * * *', () => {
+  logger.info('Iniciando a busca de despesas com obras.');
+
+  const expenditure = container.resolve(
+    GetGovernmentConstructionsExpenditureService,
+  );
+  expenditure.execute();
 });
