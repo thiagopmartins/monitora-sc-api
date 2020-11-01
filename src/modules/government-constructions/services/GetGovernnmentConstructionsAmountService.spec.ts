@@ -36,4 +36,42 @@ describe('GetGovernnmentConstructionsAmountService', () => {
       },
     ]);
   });
+
+  it('should be able to update if already exists construcion', async () => {
+    await getGovernmentConstructionsLocalization.execute();
+
+    const update = jest.spyOn(fakeConstructionsAmountRepository, 'update');
+
+    await getGovernmentConstructionsLocalization.execute();
+    await getGovernmentConstructionsLocalization.execute();
+
+    expect(update).toBeCalledWith(
+      expect.objectContaining({
+        construction_amount_id: expect.any(Number),
+      }),
+    );
+
+    expect(fakeConstructionsAmountRepository.constructions).toMatchSnapshot([
+      {
+        created_at: expect.any(Date),
+        updated_at: expect.any(Date),
+        construction_amount_id: expect.any(Number),
+        id: expect.any(String),
+      },
+    ]);
+  });
+  it('should be not call repository functions if governmentConstructionsAmountProvider is undefined', async () => {
+    jest
+      .spyOn(fakeGovarnamentConstructionsAmount, 'getAll')
+      .mockImplementation(() => Promise.resolve(undefined));
+
+    const find = jest.spyOn(
+      fakeConstructionsAmountRepository,
+      'findByConstructionAmountId',
+    );
+
+    await getGovernmentConstructionsLocalization.execute();
+
+    expect(find).not.toBeCalled();
+  });
 });

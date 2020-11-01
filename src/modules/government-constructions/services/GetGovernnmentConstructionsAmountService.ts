@@ -17,9 +17,19 @@ class GetGovernnmentConstructionsAmountService {
     const result = await this.governmentConstructionsAmountsProvider.getAll();
     if (result !== undefined) {
       result.map(async construction => {
-        await this.governmentConstructionsAmountsRepository.create(
-          construction as ICreateConstructionsAmountDTO,
+        const constructionAlreadyExists = await this.governmentConstructionsAmountsRepository.findByConstructionAmountId(
+          construction.construction_amount_id,
         );
+
+        if (!constructionAlreadyExists) {
+          await this.governmentConstructionsAmountsRepository.create(
+            construction as ICreateConstructionsAmountDTO,
+          );
+        } else {
+          await this.governmentConstructionsAmountsRepository.update(
+            constructionAlreadyExists,
+          );
+        }
       });
     }
   }

@@ -23,6 +23,27 @@ class FakeConstructionsAmountRepository
 
     return construction;
   }
+
+  public async update(
+    construction: GovernmentConstructionsAmounts,
+  ): Promise<GovernmentConstructionsAmounts> {
+    const findIndex = this.constructions.findIndex(
+      findConstruction => findConstruction.id === construction.id,
+    );
+
+    this.constructions[findIndex] = construction;
+
+    return construction;
+  }
+
+  public async findByConstructionAmountId(
+    id: number,
+  ): Promise<GovernmentConstructionsAmounts | undefined> {
+    const findConstruction = this.constructions.find(
+      construction => construction.construction_amount_id === id,
+    );
+    return findConstruction;
+  }
 }
 
 export default FakeConstructionsAmountRepository;

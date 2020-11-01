@@ -23,6 +23,21 @@ class GovernmentConstructionsAmountsRepository
 
     return governmentConstructionsamount;
   }
+
+  public async update(
+    data: GovernmentConstructionsAmounts,
+  ): Promise<GovernmentConstructionsAmounts> {
+    return this.ormRepository.save(data);
+  }
+
+  public async findByConstructionAmountId(
+    construction_amount_id: number,
+  ): Promise<GovernmentConstructionsAmounts | undefined> {
+    const construction = await this.ormRepository.findOne({
+      where: { construction_amount_id },
+    });
+    return construction;
+  }
 }
 
 export default GovernmentConstructionsAmountsRepository;

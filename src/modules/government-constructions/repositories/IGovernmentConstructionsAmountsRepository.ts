@@ -5,4 +5,12 @@ export default interface IGovernmentConstructionsAmountsRepository {
   create(
     data: ICreateConstructionsAmountDTO,
   ): Promise<GovernmentConstructionsAmounts>;
+
+  findByConstructionAmountId(
+    construction_amount_id: number,
+  ): Promise<GovernmentConstructionsAmounts | undefined>;
+
+  update(
+    data: GovernmentConstructionsAmounts,
+  ): Promise<GovernmentConstructionsAmounts>;
 }
