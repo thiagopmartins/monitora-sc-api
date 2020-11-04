@@ -17,13 +17,22 @@ describe('GetGovernnmentConstructionsService', () => {
       'create',
     );
 
-    await getGovernmentConstructionsLocalization.execute();
+    const construction = await getGovernmentConstructionsLocalization.execute();
 
     expect(create).toBeCalledWith(
       expect.objectContaining({
         construction_id: expect.any(String),
       }),
     );
+
+    expect(construction).toMatchSnapshot([
+      {
+        created_at: expect.any(Date),
+        updated_at: expect.any(Date),
+        construction_id: expect.any(String),
+        id: expect.any(String),
+      },
+    ]);
 
     expect(
       fakeConstructionsLocalizationRepository.constructions,

@@ -36,6 +36,51 @@ Array [
       2239,
       2259,
       3992,
+      7192,
+    ],
+    "updated_at": Any<Date>,
+    "urlPin": "http://www.sicop.sc.gov.br:80/mapa-smo-backend/imagens/areas/345pin.png",
+  },
+]
+`;
+
+exports[`GetGovernnmentConstructionsService should be able to create a new construction localization 2`] = `
+Array [
+  Object {
+    "construction_id": Any<String>,
+    "contracts": Array [
+      Object {
+        "constructionSitesId": Array [
+          1,
+        ],
+        "id": 1026464,
+      },
+      Object {
+        "constructionSitesId": Array [
+          1,
+        ],
+        "id": 1027889,
+      },
+      Object {
+        "constructionSitesId": Array [
+          1,
+        ],
+        "id": 1029711,
+      },
+    ],
+    "coordenates": Array [],
+    "created_at": Any<Date>,
+    "description": "PETROLÂNDIA (ENTR. SC-284) - ENTR. BR-282 (P/ BOCAINA DO SUL)",
+    "heatMapQuantity": 2.12,
+    "heatMapValue": 254912.79,
+    "id": Any<String>,
+    "nuLatitude": -27.535722175999,
+    "nuLongitude": -49.698887383295,
+    "projectsId": Array [
+      2239,
+      2259,
+      3992,
+      7192,
     ],
     "updated_at": Any<Date>,
     "urlPin": "http://www.sicop.sc.gov.br:80/mapa-smo-backend/imagens/areas/345pin.png",
@@ -79,6 +124,7 @@ Array [
       2239,
       2259,
       3992,
+      7192,
     ],
     "updated_at": Any<Date>,
     "urlPin": "http://www.sicop.sc.gov.br:80/mapa-smo-backend/imagens/areas/345pin.png",

@@ -1,20 +1,19 @@
-import IGovernmentConstructionAmountProvider from '@modules/government-constructions/providers/IGovernmentConstructionAmountProvider';
+import IGovernmentConstructionLocalizationProvider from '@modules/government-constructions/providers/IGovernmentConstructionLocalizationProvider';
 import logger from '@shared/container/providers/Logs';
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
-import GovernmentConstructionsAmounts from '../typeorm/schemas/GovernmentConstructionsAmounts';
+import GovernmentConstructionsLocalizations from '../../typeorm/schemas/GovernmentConstructionsLocalizations';
 
-class GovernmentConstructionsAmountsProvider
-  implements IGovernmentConstructionAmountProvider {
-  public async getAll(): Promise<GovernmentConstructionsAmounts[] | undefined> {
+class GovernmentConstructionsLocalizationsProvider
+  implements IGovernmentConstructionLocalizationProvider {
+  public async getAll(): Promise<
+    GovernmentConstructionsLocalizations[] | undefined
+  > {
     try {
       const result = await axios.post(
-        'http://www.sicop.sc.gov.br/sef-map-backend/source/map/project/list',
+        'http://www.sicop.sc.gov.br/sef-map-backend/source/map/publicassets/list',
         {
-          period: {
-            dtInicial: null,
-            dtFinal: null,
-          },
+          period: { dtInicial: null, dtFinal: null },
           projectYear: null,
           asset: [],
           area: [],
@@ -39,7 +38,7 @@ class GovernmentConstructionsAmountsProvider
               description: 'Concluído',
               selected: true,
               items: null,
-              expanded: true,
+              expanded: false,
             },
             {
               id: 4,
@@ -66,11 +65,7 @@ class GovernmentConstructionsAmountsProvider
               items: null,
               expanded: true,
             },
-            {
-              id: 10,
-              description: 'Paralisada até 90 dias',
-              selected: true,
-            },
+            { id: 10, description: 'Paralisada até 90 dias', selected: true },
             {
               id: 8,
               description: 'Paralisada há mais de 90 dias',
@@ -80,43 +75,40 @@ class GovernmentConstructionsAmountsProvider
           contractor: [],
           contracted: [],
           projectType: [
-            {
-              id: 2,
-              description: 'Investimento',
-              selected: true,
-            },
+            { id: 2, description: 'Investimento', selected: true },
+            { id: 1, description: 'Manutenção', selected: true },
           ],
         },
       );
 
-      const governamentConstructionsAmountsList: GovernmentConstructionsAmounts[] = [];
+      const governamentConstructionsLocalizationsList: GovernmentConstructionsLocalizations[] = [];
 
       // eslint-disable-next-line array-callback-return
       result.data.map((construction: { id: string }) => {
-        const governamentConstructionsAmounts = new GovernmentConstructionsAmounts();
+        const governamentConstructionsLocalizations = new GovernmentConstructionsLocalizations();
 
         Object.assign(
-          governamentConstructionsAmounts,
-          { construction_amount_id: construction.id },
+          governamentConstructionsLocalizations,
+          { construction_id: construction.id },
           construction,
         );
 
-        delete governamentConstructionsAmounts.id;
+        delete governamentConstructionsLocalizations.id;
 
-        governamentConstructionsAmountsList.push(
-          governamentConstructionsAmounts,
+        governamentConstructionsLocalizationsList.push(
+          governamentConstructionsLocalizations,
         );
       });
 
       logger.info(
-        `Foram encontradas ${governamentConstructionsAmountsList.length} valores de obras na api do governo.`,
+        `Foram encontradas ${governamentConstructionsLocalizationsList.length} localizações de obras na api do governo.`,
       );
 
-      return governamentConstructionsAmountsList;
+      return governamentConstructionsLocalizationsList;
     } catch (error) {
       throw new AppError(error);
     }
   }
 }
 
-export default GovernmentConstructionsAmountsProvider;
+export default GovernmentConstructionsLocalizationsProvider;

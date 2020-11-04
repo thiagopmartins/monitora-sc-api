@@ -20,7 +20,7 @@ class FakeGovarnamentConstructionsLocalization
           'http://www.sicop.sc.gov.br:80/mapa-smo-backend/imagens/areas/345pin.png',
         heatMapValue: 254912.79,
         coordenates: [],
-        projectsId: [2239, 2259, 3992],
+        projectsId: [2239, 2259, 3992, 7192],
         contracts: [
           {
             id: 1026464,

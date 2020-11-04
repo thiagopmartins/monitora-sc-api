@@ -1,29 +1,42 @@
+import GovernmentConstructionsLocalizations from '../infra/typeorm/schemas/GovernmentConstructionsLocalizations';
 import FakeGovarnamentConstructionsAmount from '../providers/fakes/FakeGovarnamentConstructionsAmount';
+import FakeGovarnamentConstructionsLocalization from '../providers/fakes/FakeGovarnamentConstructionsLocalization';
 import FakeConstructionsAmountRepository from '../repositories/fakes/FakeConstructionsAmountRepository';
 import GetGovernnmentConstructionsAmountService from './GetGovernmentConstructionsAmountService';
 
 describe('GetGovernnmentConstructionsAmountService', () => {
   let fakeConstructionsAmountRepository: FakeConstructionsAmountRepository;
   let fakeGovarnamentConstructionsAmount: FakeGovarnamentConstructionsAmount;
-  let getGovernmentConstructionsLocalization: GetGovernnmentConstructionsAmountService;
+  let getGovernmentConstructionsAmount: GetGovernnmentConstructionsAmountService;
+  let fakeGovarnamentConstructionsLocalization: FakeGovarnamentConstructionsLocalization;
+  let governmentConstructionsLocalizationList:
+    | GovernmentConstructionsLocalizations[]
+    | undefined;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     fakeConstructionsAmountRepository = new FakeConstructionsAmountRepository();
     fakeGovarnamentConstructionsAmount = new FakeGovarnamentConstructionsAmount();
-    getGovernmentConstructionsLocalization = new GetGovernnmentConstructionsAmountService(
+    fakeGovarnamentConstructionsLocalization = new FakeGovarnamentConstructionsLocalization();
+    getGovernmentConstructionsAmount = new GetGovernnmentConstructionsAmountService(
       fakeConstructionsAmountRepository,
       fakeGovarnamentConstructionsAmount,
     );
+
+    governmentConstructionsLocalizationList = await fakeGovarnamentConstructionsLocalization.getAll();
   });
 
   it('should be able to create a new construction amount', async () => {
     const create = jest.spyOn(fakeConstructionsAmountRepository, 'create');
 
-    await getGovernmentConstructionsLocalization.execute();
+    await getGovernmentConstructionsAmount.execute(
+      governmentConstructionsLocalizationList,
+    );
 
     expect(create).toBeCalledWith(
       expect.objectContaining({
         construction_amount_id: expect.any(Number),
+        latitude: expect.any(Number),
+        longitude: expect.any(Number),
       }),
     );
 
@@ -38,12 +51,14 @@ describe('GetGovernnmentConstructionsAmountService', () => {
   });
 
   it('should be able to update if already exists construcion', async () => {
-    await getGovernmentConstructionsLocalization.execute();
-
     const update = jest.spyOn(fakeConstructionsAmountRepository, 'update');
 
-    await getGovernmentConstructionsLocalization.execute();
-    await getGovernmentConstructionsLocalization.execute();
+    await getGovernmentConstructionsAmount.execute(
+      governmentConstructionsLocalizationList,
+    );
+    await getGovernmentConstructionsAmount.execute(
+      governmentConstructionsLocalizationList,
+    );
 
     expect(update).toBeCalledWith(
       expect.objectContaining({
@@ -70,7 +85,9 @@ describe('GetGovernnmentConstructionsAmountService', () => {
       'findByConstructionAmountId',
     );
 
-    await getGovernmentConstructionsLocalization.execute();
+    await getGovernmentConstructionsAmount.execute(
+      governmentConstructionsLocalizationList,
+    );
 
     expect(find).not.toBeCalled();
   });

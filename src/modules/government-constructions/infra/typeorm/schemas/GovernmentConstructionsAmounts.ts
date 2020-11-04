@@ -54,6 +54,12 @@ class GovernmentConstructionsAmounts {
     number: number;
   }[];
 
+  @Column()
+  latitude: number;
+
+  @Column()
+  longitude: number;
+
   @CreateDateColumn()
   created_at: Date;
 

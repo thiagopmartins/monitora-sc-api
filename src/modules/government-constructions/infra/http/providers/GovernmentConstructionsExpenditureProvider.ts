@@ -2,7 +2,7 @@ import IGovernmentConstructionsExpenditureProvider from '@modules/government-con
 import logger from '@shared/container/providers/Logs';
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
-import GovernmentConstructionsExpenditure from '../typeorm/schemas/GovernmentConstructionsExpenditure';
+import GovernmentConstructionsExpenditure from '../../typeorm/schemas/GovernmentConstructionsExpenditure';
 
 class GovernmentConstructionsExpenditureProvider
   implements IGovernmentConstructionsExpenditureProvider {

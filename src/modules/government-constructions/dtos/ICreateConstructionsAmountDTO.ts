@@ -15,4 +15,6 @@ export default interface ICreateConstructionsAmountDTO {
     description: string;
     number: number;
   }[];
+  latidute?: number;
+  longitude?: number;
 }
