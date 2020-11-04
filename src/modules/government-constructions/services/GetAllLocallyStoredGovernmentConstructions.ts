@@ -21,12 +21,22 @@ class GetAllLocallyStoredGovernmentConstructions {
     year,
     status,
   }: IRequest): Promise<GovernmentConstructionsAmounts[]> {
-    const teste = this.governmentConstructionsAmountsRepository.find({
+    if (year === undefined && status === undefined) {
+      return this.governmentConstructionsAmountsRepository.find();
+    }
+
+    if (year === undefined) {
+      return this.governmentConstructionsAmountsRepository.findByStatus(status);
+    }
+
+    if (status === undefined) {
+      return this.governmentConstructionsAmountsRepository.findByYear(year);
+    }
+
+    return this.governmentConstructionsAmountsRepository.findByStatusAndYear({
       year,
       status,
     });
-
-    return teste;
   }
 }
 

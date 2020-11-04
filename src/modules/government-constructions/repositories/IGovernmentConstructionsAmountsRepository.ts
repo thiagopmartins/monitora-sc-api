@@ -15,7 +15,16 @@ export default interface IGovernmentConstructionsAmountsRepository {
     data: GovernmentConstructionsAmounts,
   ): Promise<GovernmentConstructionsAmounts>;
 
-  find(
-    filter: IFindConstructionsAmountDTO | undefined,
+  find(): Promise<GovernmentConstructionsAmounts[]>;
+
+  findByStatus(status: string[]): Promise<GovernmentConstructionsAmounts[]>;
+
+  findByYear(year: {
+    initial: number;
+    finish: number;
+  }): Promise<GovernmentConstructionsAmounts[]>;
+
+  findByStatusAndYear(
+    filter: IFindConstructionsAmountDTO,
   ): Promise<GovernmentConstructionsAmounts[]>;
 }

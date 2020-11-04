@@ -40,33 +40,38 @@ class GovernmentConstructionsAmountsRepository
     return construction;
   }
 
-  public async find(
-    filter: IFindConstructionsAmountDTO | undefined,
+  public async findByStatus(
+    status: string[],
   ): Promise<GovernmentConstructionsAmounts[]> {
-    if (filter?.status === undefined && filter?.year === undefined) {
-      return this.ormRepository.find();
-    }
+    return this.ormRepository.find({
+      where: { status: { $in: status } },
+    });
+  }
 
-    if (filter.status === undefined) {
-      return this.ormRepository.find({
-        where: {
-          year: { $gte: filter.year.initial, $lt: filter.year.finish + 1 },
-        },
-      });
-    }
-
-    if (filter.year === undefined) {
-      return this.ormRepository.find({
-        where: { status: { $in: filter?.status } },
-      });
-    }
-
+  public async findByYear(year: {
+    initial: number;
+    finish: number;
+  }): Promise<GovernmentConstructionsAmounts[]> {
     return this.ormRepository.find({
       where: {
-        status: { $in: filter?.status },
+        year: { $gte: year.initial, $lt: year.finish + 1 },
+      },
+    });
+  }
+
+  public async findByStatusAndYear(
+    filter: IFindConstructionsAmountDTO,
+  ): Promise<GovernmentConstructionsAmounts[]> {
+    return this.ormRepository.find({
+      where: {
+        status: { $in: filter.status },
         year: { $gte: filter.year.initial, $lt: filter.year.finish + 1 },
       },
     });
+  }
+
+  public async find(): Promise<GovernmentConstructionsAmounts[]> {
+    return this.ormRepository.find();
   }
 }
 
