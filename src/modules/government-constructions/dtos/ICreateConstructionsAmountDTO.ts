@@ -8,13 +8,13 @@ export default interface ICreateConstructionsAmountDTO {
   amount: number;
   cityId: number;
   cityDescription: string;
-  projectLink: string;
+  projectLink?: string;
   peExecuted: number;
   contracts: {
     id: number;
-    description: string;
-    number: number;
+    description?: string;
+    number?: number;
   }[];
-  latidute?: number;
+  latitude?: number;
   longitude?: number;
 }

@@ -20,14 +20,14 @@ class GetGovernnmentConstructionsAmountService {
       | undefined,
   ): Promise<void> {
     const result = await this.governmentConstructionsAmountsProvider.getAll();
-    if (result !== undefined) {
+    if (result !== undefined && constructionLocalization !== undefined) {
       result.map(async construction => {
         const constructionAlreadyExists = await this.governmentConstructionsAmountsRepository.findByConstructionAmountId(
           construction.construction_amount_id,
         );
 
         if (!constructionAlreadyExists) {
-          const constructionFinded = constructionLocalization?.find(x =>
+          const constructionFinded = constructionLocalization.find(x =>
             x.projectsId.find(p => p === construction.construction_amount_id),
           );
 

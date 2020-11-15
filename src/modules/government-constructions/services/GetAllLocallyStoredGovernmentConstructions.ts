@@ -3,7 +3,7 @@ import GovernmentConstructionsAmounts from '../infra/typeorm/schemas/GovernmentC
 import IGovernmentConstructionsAmountsRepository from '../repositories/IGovernmentConstructionsAmountsRepository';
 
 interface IRequest {
-  year: {
+  year?: {
     initial: number;
     finish: number;
   };
@@ -21,7 +21,7 @@ class GetAllLocallyStoredGovernmentConstructions {
     year,
     status,
   }: IRequest): Promise<GovernmentConstructionsAmounts[]> {
-    if (year === undefined && status === undefined) {
+    if (year === undefined && (status === undefined || status.length === 0)) {
       return this.governmentConstructionsAmountsRepository.find();
     }
 
@@ -29,7 +29,7 @@ class GetAllLocallyStoredGovernmentConstructions {
       return this.governmentConstructionsAmountsRepository.findByStatus(status);
     }
 
-    if (status === undefined) {
+    if (status === undefined || status.length === 0) {
       return this.governmentConstructionsAmountsRepository.findByYear(year);
     }
 

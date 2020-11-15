@@ -91,4 +91,15 @@ describe('GetGovernnmentConstructionsAmountService', () => {
 
     expect(find).not.toBeCalled();
   });
+
+  it('should be not call repository functions if GovernmentConstructionsLocalizations is undefined', async () => {
+    const find = jest.spyOn(
+      fakeConstructionsAmountRepository,
+      'findByConstructionAmountId',
+    );
+
+    await getGovernmentConstructionsAmount.execute(undefined);
+
+    expect(find).not.toBeCalled();
+  });
 });

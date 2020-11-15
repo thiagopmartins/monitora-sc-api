@@ -46,23 +46,28 @@ class FakeConstructionsAmountRepository
     return findConstruction;
   }
 
-  public async find(
-    filter: IFindConstructionsAmountDTO | undefined,
+  public async findByStatus(
+    status: string[],
   ): Promise<GovernmentConstructionsAmounts[]> {
-    if (filter === undefined) {
-      return this.constructions;
-    }
+    return this.constructions.filter(x => status.includes(x.status));
+  }
 
-    if (filter.year === undefined) {
-      return this.constructions.filter(x => filter.status.includes(x.status));
-    }
+  public async find(): Promise<GovernmentConstructionsAmounts[]> {
+    return this.constructions;
+  }
 
-    if (filter.status === undefined) {
-      return this.constructions.filter(x => {
-        return x.year >= filter.year.initial && x.year <= filter.year.finish;
-      });
-    }
+  public async findByYear(year: {
+    initial: number;
+    finish: number;
+  }): Promise<GovernmentConstructionsAmounts[]> {
+    return this.constructions.filter(x => {
+      return x.year >= year.initial && x.year <= year.finish;
+    });
+  }
 
+  public async findByStatusAndYear(
+    filter: IFindConstructionsAmountDTO,
+  ): Promise<GovernmentConstructionsAmounts[]> {
     return this.constructions.filter(
       x =>
         filter.status.includes(x.status) &&
