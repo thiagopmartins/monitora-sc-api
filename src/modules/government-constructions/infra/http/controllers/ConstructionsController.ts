@@ -1,6 +1,5 @@
 import GetAllLocallyStoredGovernmentConstructions from '@modules/government-constructions/services/GetAllLocallyStoredGovernmentConstructions';
 import { Request, Response } from 'express';
-import qs from 'qs';
 import { container } from 'tsyringe';
 
 class ConstructionsController {
